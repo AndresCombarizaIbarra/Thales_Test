@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Text.Json;
+using Newtonsoft.Json;
 
 namespace DataLayer.Services
 {
@@ -23,13 +23,8 @@ namespace DataLayer.Services
             if (response.IsSuccessStatusCode)
             {
                 var jsonResponse = await response.Content.ReadAsStringAsync();
-                var result = JsonSerializer.Deserialize<ResultEmployee>(jsonResponse);
-
-                if (result.Status == "success")
-                {
-                    employees = result.Employees;
-                }
-                
+                var result = JsonConvert.DeserializeObject<ResultEmployee>(jsonResponse);
+                employees = result.Data;
             }
 
             return employees;

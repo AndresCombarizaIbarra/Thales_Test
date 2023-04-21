@@ -1,20 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Globalization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace DataLayer
 {
-    public class ResultEmployee
+    public partial class ResultEmployee
     {
-        public List<Employee> Employees { get; set; }
-        public string Message { get; set; }
+        [JsonProperty("status")]
         public string Status { get; set; }
 
-        public ResultEmployee()
-        {
-            
-        }
+        [JsonProperty("data")]
+        public List<Employee> Data { get; set; }
+
+        [JsonProperty("message")]
+        public string Message { get; set; }
     }
 }
+

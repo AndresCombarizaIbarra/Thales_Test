@@ -11,14 +11,19 @@ namespace DataLayer
     public class Employee
     {
         [JsonProperty("id")]
-        public int Id { get; set; }
+        public long Id { get; set; }
+
         [JsonProperty("employee_name")]
         public string EmployeeName { get; set; }
+
         [JsonProperty("employee_salary")]
-        public double EmployeeSalary { get; set; }
+        public long EmployeeSalary { get; set; }
+
         [JsonProperty("employee_age")]
-        public int EmployeeAge { get; set; }
+        public long EmployeeAge { get; set; }
+
+        [JsonProperty("profile_image")]
         public string ProfileImage { get; set; }
-        public double EmployeeAnualSalary { get; set; }
+        public long EmployeeAnualSalary { get; set; }
     }
 }
