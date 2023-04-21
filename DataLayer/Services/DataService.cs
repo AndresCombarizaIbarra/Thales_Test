@@ -30,9 +30,9 @@ namespace DataLayer.Services
             return employees;
         }
 
-        public async Task<List<Employee>> GetById(int id, string _baseUrl)
+        public async Task<DataEmployee> GetById(int id, string _baseUrl)
         {
-            List<Employee> employee = new List<Employee>();
+            DataEmployee employee = new DataEmployee();
             var client = new HttpClient();
             client.BaseAddress = new Uri(_baseUrl);
             var response = await client.GetAsync($"api/v1/employee/{id}");
@@ -40,10 +40,10 @@ namespace DataLayer.Services
             if (response.IsSuccessStatusCode)
             {
                 var jsonResponse = await response.Content.ReadAsStringAsync();
-                var result = JsonConvert.DeserializeObject<ResultEmployee>(jsonResponse);
+                var result = JsonConvert.DeserializeObject<ResultEmployeeById>(jsonResponse);
                 employee = result.Data;
             }
-
+            
             return employee;
         }
     }

@@ -14,20 +14,12 @@ namespace Thales_Test.Controllers
         private readonly ServiceApi _serviceApi = new ServiceApi();
         public static string _baseUrl; 
 
-        public async Task<IActionResult> Index(int id)
+        public async Task<IActionResult> Index()
         {
             _baseUrl = _serviceApi.GetBaseUrl();
             EmployeeBusinessLogic businessLogic = new EmployeeBusinessLogic();
-            if (id == 0)
-            {
-                List<Employee> employees = await businessLogic.GetAll(_baseUrl);
-                return View(employees);
-            }
-            else
-            {
-                List<Employee> employee = await businessLogic.GetById(id, _baseUrl);
-                return View(employee);
-            }
+            List<Employee> employees = await businessLogic.GetAll(_baseUrl);
+            return View(employees);
         }
 
         public IActionResult Privacy()

@@ -29,7 +29,7 @@
                 if(id != "")
                 {
                     //alert(id);
-                    GetEmployeebyId(id, "algo", "algo");
+                    GetEmployeebyId(id, "some", "some");
                 }
                 else
                 {
@@ -42,22 +42,22 @@
 
         function GetEmployeebyId(id, prepKeys, prepValues) {
 
-            var controller = "Home/";//Aquí pones la url del controlador.
+            var controller = "Employee/";
             var flag = [];
-            var url = controller + "Index";//Aquí igual
+            var url = controller + "EmployeeById";
 
             $.ajax({
                 type: "post",
                 url: url,
-                async: false,
+                async: true,
                 cache: false,
                 data: { "id": id, "repKeys": prepKeys, "repValues": prepValues },
                 success: function (r) {
                     flag = r;
+                    window.location.href = url + "/" + id;
                 },
                 error: function (xhr, status, error) {
-                    showAlertModal(error);
-                    //alert(error);
+                    alert(error);
                 }
             });
             return flag;
@@ -85,34 +85,38 @@
         <button type="button" class="btn btn-primary mb-3" id="btnSearch">Find Employee</button>
     </div>
 </form>
-<div class="card">
-    <div>
-    </div>
-    <hr />
-    <hr />
-    <div class="card-body">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th class="col" style="background-color:lightblue; border-color:black; text-align:center">Id</th>
-                    <th class="col" style="background-color:lightblue; border-color:black; text-align:center">Employee Name</th>
-                    <th class="col" style="background-color:lightblue; border-color:black; text-align:center">Employee Salary</th>
-                    <th class="col" style="background-color:lightblue; border-color:black; text-align:center">Employee Age</th>
-                    <th class="col" style="background-color:lightblue; border-color:black; text-align:center">Employee Anual Salary</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
+@if (Model != null)
+{
+    <div class="card">
+        <div>
+        </div>
+        <hr />
+        <hr />
+        <div class="card-body">
+            <table class="table">
+                <thead>
                     <tr>
-                        <td align="center">@item.Id</td>
-                        <td align="center">@item.EmployeeName</td>
-                        <td align="center">@item.EmployeeSalary</td>
-                        <td align="center">@item.EmployeeAge</td>
-                        <td align="center">@item.EmployeeAnualSalary</td>
+                        <th class="col" style="background-color:lightblue; border-color:black; text-align:center">Id</th>
+                        <th class="col" style="background-color:lightblue; border-color:black; text-align:center">Employee Name</th>
+                        <th class="col" style="background-color:lightblue; border-color:black; text-align:center">Employee Salary</th>
+                        <th class="col" style="background-color:lightblue; border-color:black; text-align:center">Employee Age</th>
+                        <th class="col" style="background-color:lightblue; border-color:black; text-align:center">Employee Anual Salary</th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td align="center">@item.Id</td>
+                            <td align="center">@item.EmployeeName</td>
+                            <td align="center">@item.EmployeeSalary</td>
+                            <td align="center">@item.EmployeeAge</td>
+                            <td align="center">@item.EmployeeAnualSalary</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
+}
+

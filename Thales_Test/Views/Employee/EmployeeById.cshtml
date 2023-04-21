@@ -1,0 +1,39 @@
+﻿@model DataLayer.Employee
+@{
+    ViewData["Title"] = "Employee Page";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Employees</h1>
+</div>
+    <div class="card">
+        <div>
+        </div>
+        <hr />
+        <hr />
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="col" style="background-color:lightblue; border-color:black; text-align:center">Id</th>
+                        <th class="col" style="background-color:lightblue; border-color:black; text-align:center">Employee Name</th>
+                        <th class="col" style="background-color:lightblue; border-color:black; text-align:center">Employee Salary</th>
+                        <th class="col" style="background-color:lightblue; border-color:black; text-align:center">Employee Age</th>
+                        <th class="col" style="background-color:lightblue; border-color:black; text-align:center">Employee Anual Salary</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td align="center">@Model.Id</td>
+                        <td align="center">@Model.EmployeeName</td>
+                        <td align="center">@Model.EmployeeSalary</td>
+                        <td align="center">@Model.EmployeeAge</td>
+                        <td align="center">@Model.EmployeeAnualSalary</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <a asp-action="Index" asp-controller="Home" class="btn btn-warning btn-sm">Back to the List</a>
+    </div>
+
