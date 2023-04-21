@@ -22,10 +22,13 @@ namespace BusinessLayer
             return employees;
         }
 
-        public async Task<Employee> GetById(int id, string _baseUrl)
+        public async Task<List<Employee>> GetById(int id, string _baseUrl)
         {
-            Employee employee = await _service.GetById(id, _baseUrl);
-            CalculateAnualSalary(employee);
+            List<Employee> employee = await _service.GetById(id, _baseUrl);
+            foreach (var item in employee)
+            {
+                CalculateAnualSalary(item);
+            }
             return employee;
         }
 

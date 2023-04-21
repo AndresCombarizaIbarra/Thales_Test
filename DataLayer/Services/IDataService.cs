@@ -9,6 +9,6 @@ namespace DataLayer.Services
     public interface IDataService
     {
         Task<List<Employee>> GetAll(string _baseUrl);
-        Task<Employee> GetById(int id, string _baseUrl);
+        Task<List<Employee>> GetById(int id, string _baseUrl);
     }
 }
