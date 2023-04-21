@@ -1,0 +1,43 @@
+﻿@model List<DataLayer.Employee>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        Employees
+    </div>
+    <div class="card-body">
+        <input class="form-control form-control-sm" type="text" placeholder=".form-control-sm" aria-label=".form-control-sm example">
+        <hr />
+        <button type="button" class="btn btn-primary">Find Employee</button>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Employee Name</th>
+                    <th>Employee Salary</th>
+                    <th>Employee Age</th>
+                    <th>Employee Anual Salary</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var item in Model)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.EmployeeName</td>
+                        <td>@item.EmployeeSalary</td>
+                        <td>@item.EmployeeAge</td>
+                        <td>@item.EmployeeAnualSalary</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
