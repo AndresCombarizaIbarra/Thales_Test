@@ -32,18 +32,36 @@ namespace DataLayer.Services
 
         public async Task<DataEmployee> GetById(int id, string _baseUrl)
         {
+                       
             DataEmployee employee = new DataEmployee();
             var client = new HttpClient();
             client.BaseAddress = new Uri(_baseUrl);
-            var response = await client.GetAsync($"api/v1/employee/{id}");
-
-            if (response.IsSuccessStatusCode)
+            try
             {
-                var jsonResponse = await response.Content.ReadAsStringAsync();
-                var result = JsonConvert.DeserializeObject<ResultEmployeeById>(jsonResponse);
-                employee = result.Data;
+                var response = await client.GetAsync($"api/v1/employee/{id}");
+
+                if (response.ReasonPhrase == "Too Many Requests")
+                {
+                    employee.Id = -429;
+                }
+
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var jsonResponse = await response.Content.ReadAsStringAsync();
+                    var result = JsonConvert.DeserializeObject<ResultEmployeeById>(jsonResponse);
+                    employee = result.Data;
+                }
+
+
             }
-            
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+
             return employee;
         }
     }

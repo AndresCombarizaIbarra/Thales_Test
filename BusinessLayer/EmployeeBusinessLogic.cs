@@ -26,12 +26,20 @@ namespace BusinessLayer
         {
             DataEmployee dataEmployee = await _service.GetById(id, _baseUrl);
             Employee employee = new Employee();
-            employee.Id = dataEmployee.Id;
-            employee.EmployeeName = dataEmployee.EmployeeName;
-            employee.EmployeeSalary = dataEmployee.EmployeeSalary;
-            employee.ProfileImage = dataEmployee.ProfileImage;
-            employee.EmployeeAge = dataEmployee.EmployeeAge;
-            CalculateAnualSalary(employee);
+            if (dataEmployee.Id == -429)
+            {
+                employee.Id = dataEmployee.Id;
+            }
+            else
+            {
+                employee.Id = dataEmployee.Id;
+                employee.EmployeeName = dataEmployee.EmployeeName;
+                employee.EmployeeSalary = dataEmployee.EmployeeSalary;
+                employee.ProfileImage = dataEmployee.ProfileImage;
+                employee.EmployeeAge = dataEmployee.EmployeeAge;
+                CalculateAnualSalary(employee);
+            }
+            
             return employee;
         }
 

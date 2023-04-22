@@ -5,67 +5,11 @@
 @section script
 {
     <script type="text/javascript" language="javascript">
-        $(function () {
-            $('#textbox_id').keydown(function (e) {
-                if (e.shiftKey || e.ctrlKey || e.altKey) {
-                    e.preventDefault();
-                } else {
-                    var key = e.keyCode;
-                    //alert(key)
-                    if (!((key == 8) || (key == 46) ||
-                        (key >= 35 && key <= 40)
-                        || (key >= 48 && key <= 57)
-                        || (key >= 96 && key <= 105))) {
-                        e.preventDefault();
-                    }
-                }
-            });
-        });
 
-        $(document).ready(function () {
-            $("#btnSearch").on('click', function (event) {
-                var id = $('#textbox_id').val();
-                event.preventDefault();
-                if(id != "")
-                {
-                    //alert(id);
-                    GetEmployeebyId(id, "some", "some");
-                }
-                else
-                {
-                    location.reload();
-                }
-
-                
-            });
-        });
-
-        function GetEmployeebyId(id, prepKeys, prepValues) {
-
-            var controller = "Employee/";
-            var flag = [];
-            var url = controller + "EmployeeById";
-
-            $.ajax({
-                type: "post",
-                url: url,
-                async: true,
-                cache: false,
-                data: { "id": id, "repKeys": prepKeys, "repValues": prepValues },
-                success: function (r) {
-                    flag = r;
-                    window.location.href = url + "/" + id;
-                },
-                error: function (xhr, status, error) {
-                    alert(error);
-                }
-            });
-            return flag;
-        }
+        window.ListEmployees = JSON.parse('@Html.Raw(Json.Serialize(Model))');
         </script>
-   
+}  
         
-}
 
 <div class="text-center">
     <h1 class="display-4">Employees</h1>
