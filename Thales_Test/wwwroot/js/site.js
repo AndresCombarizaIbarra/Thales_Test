@@ -17,6 +17,15 @@
 });
 
 $(document).ready(function () {
+    $.each(window.ListEmployees, function (ind, elem) {
+        if (elem.id == -429) { 
+            alert("Server Error : Status Code 429 Too many requests");
+        }
+    });
+        
+
+
+
     $("#btnSearch").on('click', function (event) {
         var id = $('#textbox_id').val();
         event.preventDefault();

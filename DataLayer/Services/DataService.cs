@@ -19,13 +19,29 @@ namespace DataLayer.Services
             var client = new HttpClient();
             client.BaseAddress = new Uri(_baseUrl);
             var response = await client.GetAsync("api/v1/employees");
-
-            if (response.IsSuccessStatusCode)
+            
+            try
             {
-                var jsonResponse = await response.Content.ReadAsStringAsync();
-                var result = JsonConvert.DeserializeObject<ResultEmployee>(jsonResponse);
-                employees = result.Data;
+                if (response.ReasonPhrase == "Too Many Requests")
+                {
+                    Employee empl = new Employee();
+                    empl.Id = -429;
+                    employees.Add(empl);
+                }
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var jsonResponse = await response.Content.ReadAsStringAsync();
+                    var result = JsonConvert.DeserializeObject<ResultEmployee>(jsonResponse);
+                    employees = result.Data;
+                }
+
             }
+            catch (Exception)
+            {
+                throw;
+            }
+            
 
             return employees;
         }

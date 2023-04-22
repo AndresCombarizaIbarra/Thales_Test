@@ -3,13 +3,13 @@
     ViewData["Title"] = "Home Page";
 }
 @section script
-{
+    {
     <script type="text/javascript" language="javascript">
 
         window.ListEmployees = JSON.parse('@Html.Raw(Json.Serialize(Model))');
-        </script>
-}  
-        
+    </script>
+}
+
 
 <div class="text-center">
     <h1 class="display-4">Employees</h1>
@@ -29,7 +29,7 @@
         <button type="button" class="btn btn-primary mb-3" id="btnSearch">Find Employee</button>
     </div>
 </form>
-@if (Model != null)
+@if (Model[0].Id != -429)
 {
     <div class="card">
         <div>
