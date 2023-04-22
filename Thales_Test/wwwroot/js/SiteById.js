@@ -3,7 +3,6 @@
 $(document).ready(function () {
     if (boolclient) {
         variables = getGET();
-        debugger;
         var a = parseFloat(variables[2].employee_salary) * 12;
         var td;
         var tr = $("<tr/>");
